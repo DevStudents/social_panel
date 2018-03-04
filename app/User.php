@@ -27,5 +27,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+    public function friend_1(){
+        return $this->belongsToMany('App\User','friends','user_id','friend_id')
+        ->wherePivot('accepted',3);
+    }
+    public function friend_2(){
+        return $this->belongsToMany('App\User','friends','friend_id','user_id')
+            ->wherePivot('accepted',3);
+    }
+    public function friends(){
+        return $this->friend_1->merge($this->friend_2);
+    }
 }

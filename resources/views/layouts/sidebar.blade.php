@@ -23,7 +23,7 @@
 
 
             <p>  {{$user->email}} </p>
-                    <a href="{{url('/friends/'.$user->id)}}"><button class="btn btn-primary">Friends</button></a>
+                    <a href="{{url('users/'.$user->id.'/friends')}}"><button class="btn btn-primary">Friends</button></a>
             @if(Auth::check() && $user->id !== Auth::id())
                 @switch(friendship($user->id))
                     @case(1)

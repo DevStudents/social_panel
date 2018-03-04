@@ -24,8 +24,7 @@ Route::get('/search', 'SearchController@users');
 Route::resource('/users', 'UsersController',['except' => ['index','create','store','destroy']]);
 
 
-Route::get('/friends/{id}','FriendsController@index');
-//Route::get('/friends/{id}','FriendsController@friend_list');
+Route::get('/users/{id}/friends','FriendsController@index');
 Route::post('/friends/{friend}','FriendsController@add');
 Route::patch('/friends/{friend}','FriendsController@accept');
 Route::delete('/friends/{id}','FriendsController@delete');

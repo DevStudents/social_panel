@@ -77,7 +77,7 @@
 
                                     </li>
                                     <li>
-                                        <a href="{{url('/friends/'.Auth::id())}}">
+                                        <a href="{{url('users/'.Auth::id().'/friends/')}}">
                                                 Friends
                                         </a>
 

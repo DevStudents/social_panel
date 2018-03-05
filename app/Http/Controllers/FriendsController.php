@@ -16,12 +16,9 @@ class FriendsController extends Controller
      */
 
     public function index($id){
-
-       $list_user = User::findOrFail($id)->friends();
-
-        return view('users.friends',compact('list_user','id'));
+        $list_user = friends_index($id);
+        return view('users.friends',compact('list_user'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -40,7 +37,6 @@ class FriendsController extends Controller
         elseif(friendship($friend_id) == 2){
             $this->accept($friend_id);
         }
-
         return back();
     }
 

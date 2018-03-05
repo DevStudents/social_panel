@@ -8,10 +8,10 @@
                 @endif
                 @forelse($list_user as $user)
                     <div class="col-md-3 col-sm-4 col-xs-6" style="align-items: center;">
-                        <img class="img-responsive" src="{{url('/user-avatar/'.($user->id)
+                        <img class="img-responsive" src="{{url('/user-avatar/'.$user->id
                         .'/250')}}" alt="User avatar">
                         <a href="{{url('/users/'.$user->id)}}">
-                            {{ $user->name}}
+                            {{$user->name}}
                         </a>
                     </div>
                 @empty

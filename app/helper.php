@@ -23,10 +23,7 @@ use Illuminate\Support\Facades\Auth;
             return $friend_query[0]->accepted;
         }
     }
-         function user($id){
-            $friend = User::where('id',$id)->get();
-            return $friend;
-    }
+
        function to_accept($id){
            $to_accept = Friend::where([
                ['friend_id','=', Auth::id()],
@@ -42,4 +39,9 @@ use Illuminate\Support\Facades\Auth;
        function accept_list(){
           $friend_request = User::findOrFail(Auth::id())->accept();
           return $friend_request;
+       }
+       function friends_index($id)
+       {
+           $list_user = User::findOrFail($id)->friends();
+           return $list_user;
        }

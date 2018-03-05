@@ -77,6 +77,10 @@
 
                                     </li>
                                     <li>
+                                        <a href="{{url('/users/'.Auth::user()->id)}}">My profile</a>
+
+                                    </li>
+                                    <li>
                                         <a href="{{url('users/'.Auth::id().'/friends/')}}">
                                                 Friends
                                         </a>
@@ -96,11 +100,12 @@
                                     <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu list-group">
                                     @forelse(accept_list() as $to_accept)
-                                        <li style="font-size: smaller">User
-                                         <a href="{{url('/users/'.$to_accept->id)}}">{{$to_accept->name}}</a>
-                                         sent you a friend request</li>
+                                        <a  class="list-group-item" href="{{url('/users/'.$to_accept->id)}}">
+                                         <li style="font-size: smaller">
+                                         <b>{{$to_accept->name}}</b>
+                                         sent you a friend request</li></a>
                                     @empty <h5 style="font-size: smaller">Nothing new...</h5>
                                     @endforelse
                                 </ul>

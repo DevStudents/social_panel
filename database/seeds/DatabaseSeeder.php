@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use App\Friend;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
 
         //loop - create 30 users with random dana
-        for($i = 0;$i <= $number_of_users;$i++){
+        for($user_id = 1;$user_id <= $number_of_users;$user_id++){
            $sex = $faker->randomElement(['m','f']);
             switch($sex){
                 case 'm':
@@ -41,7 +42,30 @@ class DatabaseSeeder extends Seeder
                 'password'=> bcrypt($password),
                 'avatar' => $avatar,
                 'sex'=> $sex,
-           ]); 
+           ]);
+
+            for($i = 1;$i <= $faker->numberBetween(0,$number_of_users -1);$i++){
+
+                $friend_id = $faker->numberBetween(1,$number_of_users);
+
+                $friendship_exists = Friend::where([
+                        ['friend_id', '=', $friend_id],
+                        ['user_id', '=', $user_id]]
+                )->orWhere([
+                        ['friend_id', '=', $user_id],
+                        ['user_id', '=', $friend_id]]
+                )->exists();
+
+                if(!$friendship_exists && $user_id != $friend_id){
+                    DB::table('friends')->insert([
+                        'user_id'=> $user_id,
+                        'friend_id'=> $friend_id,
+                        'accepted' => $faker->numberBetween(2,3),
+                        'created_at' => $faker->dateTimeThisYear('now'),
+                    ]);
+
+                }
+            }
             
         }
     }

@@ -99,7 +99,7 @@
                                 <ul class="dropdown-menu">
                                     @forelse(accept_list() as $to_accept)
                                         <li style="font-size: smaller">User
-                                         <a href="{{url('/users/'.user($to_accept->user_id)[0]->id)}}">{{user($to_accept->user_id)[0]->name}}</a>
+                                         <a href="{{url('/users/'.$to_accept->id)}}">{{$to_accept->name}}</a>
                                          sent you a friend request</li>
                                     @empty <h5 style="font-size: smaller">Nothing new...</h5>
                                     @endforelse

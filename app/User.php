@@ -38,4 +38,17 @@ class User extends Authenticatable
     public function friends(){
         return $this->friend_1->merge($this->friend_2);
     }
+    public function accept(){
+        return $this->belongsToMany('App\User','friends','friend_id','user_id')
+            ->wherePivot('accepted',2)->get();
+       // return $this->accept;
+    }
+   /* public function accept_2(){
+        return $this->belongsToMany('App\User','friends','friend_id','user_id')
+            ->wherePivot('accepted',2);
+    } */
+   /* public function accept(){
+        return $this->accept_1;
+    }
+   */
 }

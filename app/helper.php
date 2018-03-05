@@ -40,10 +40,6 @@ use Illuminate\Support\Facades\Auth;
            }
        }
        function accept_list(){
-           $id = Auth::id();
-           $friend_request = Friend::where([
-               ['friend_id','=', $id],
-               ['accepted','=',2]])->get();
-
-           return $friend_request;
+          $friend_request = User::findOrFail(Auth::id())->accept();
+          return $friend_request;
        }

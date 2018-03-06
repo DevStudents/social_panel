@@ -27,6 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    // friend list collection
     public function friend_1(){
         return $this->belongsToMany('App\User','friends','user_id','friend_id')
         ->wherePivot('accepted',3);
@@ -38,17 +40,11 @@ class User extends Authenticatable
     public function friends(){
         return $this->friend_1->merge($this->friend_2);
     }
+
+    //friend requests
     public function accept(){
         return $this->belongsToMany('App\User','friends','friend_id','user_id')
             ->wherePivot('accepted',2)->get();
-       // return $this->accept;
     }
-   /* public function accept_2(){
-        return $this->belongsToMany('App\User','friends','friend_id','user_id')
-            ->wherePivot('accepted',2);
-    } */
-   /* public function accept(){
-        return $this->accept_1;
-    }
-   */
+
 }

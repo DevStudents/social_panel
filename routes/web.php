@@ -23,6 +23,8 @@ Route::get('/search', 'SearchController@users');
 
 Route::resource('/users', 'UsersController',['except' => ['index','create','store','destroy']]);
 
+Route::resource('/posts', 'PostsController',['except' => ['index','create']]);
+
 
 Route::get('/users/{id}/friends','FriendsController@index');
 Route::post('/friends/{friend}','FriendsController@add');

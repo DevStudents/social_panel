@@ -6,10 +6,22 @@
         @include('layouts.sidebar')
         <div class="col-md-8">
         <div class="panel panel-default">
+            @if($user->id == Auth::id())
+            <form  method="POST" action="{{url('/posts')}}">
+                {{csrf_field()}}
             <div class="panel-body">
-                <article>
-                    Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker
-                </article>
+                @if ($errors->has('post_content'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('post_content') }}</strong>
+                     </span>
+                @endif
+                <div class="form-group{{ $errors->has('post_content') ? ' has-error' : '' }}">
+                    <textarea class="form-control" name="post_content"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary pull-left" >Publish</button>
+            </div>
+            </form>
+            @endif
             </div>    
         </div>
         </div>

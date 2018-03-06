@@ -16,7 +16,7 @@
                      </span>
                 @endif
                 <div class="form-group{{ $errors->has('post_content') ? ' has-error' : '' }}">
-                    <textarea class="form-control" name="post_content"></textarea>
+                    <textarea class="form-control" name="post_content">{{old('post_content')}}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary pull-left" >Publish</button>
             </div>

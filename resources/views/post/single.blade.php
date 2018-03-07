@@ -15,7 +15,7 @@
             <form method="post" action="{{url('/posts/'.$post->id)}}">
                 {{csrf_field()}}
                 {{method_field('DELETE')}}
-                <button type="submit" class="btn btn-danger btn-sm pull-right" style="margin:10px;">Delete</button>
+                <button type="submit" onclick="return confirm('Are U sure?')" class="btn btn-danger btn-sm pull-right" style="margin:10px;">Delete</button>
             </form>
         @endif
     </div>

@@ -10,12 +10,23 @@ use Illuminate\Support\Facades\Auth;
 class PostsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('author',['except' => ['show','store','index']]);
+    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
      */
+    public function index()
+    {
+        $all_posts = Post::orderBy('created_at','desc')->get();
+        return view('post.main',compact('all_posts'));
+    }
+
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -29,6 +40,7 @@ class PostsController extends Controller
             'user_id' => Auth::id(),
             'post_content' => $request->post_content,
         ]);
+
         return back();
     }
 

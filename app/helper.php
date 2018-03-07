@@ -45,3 +45,7 @@ use Illuminate\Support\Facades\Auth;
            $list_user = User::findOrFail($id)->friends();
            return $list_user;
        }
+
+
+
+

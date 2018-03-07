@@ -92,8 +92,8 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     @if(count(accept_list()) > 0)
-                                        <b style="color: red">{{count(accept_list())}} </b>
-                                        <b style="color: red">Notification</b>
+                                        <b style="color: red">Notifications</b>
+                                        <b style="color: red">({{count(accept_list())}})</b>
                                     @else
                                         Notifications
                                     @endif

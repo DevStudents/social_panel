@@ -5,26 +5,20 @@
     <div class="row">
         @include('layouts.sidebar')
         <div class="col-md-8">
-        <div class="panel panel-default">
+
             @if($user->id == Auth::id())
-            <form  method="POST" action="{{url('/posts')}}">
-                {{csrf_field()}}
-            <div class="panel-body">
-                @if ($errors->has('post_content'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('post_content') }}</strong>
-                     </span>
-                @endif
-                <div class="form-group{{ $errors->has('post_content') ? ' has-error' : '' }}">
-                    <textarea class="form-control" name="post_content">{{old('post_content')}}</textarea>
-                </div>
-                <button type="submit" class="btn btn-primary pull-left" >Publish</button>
-            </div>
-            </form>
+            @include('post.form')
             @endif
-            </div>    
-        </div>
+
+            @forelse($posts as $post)
+                @include('post.single')
+            @empty
+                    <div class="panel panel-default" style="padding: 10px 10px;">
+                        <h2>This user has no posts yet :(</h2>
+                    </div>
+            @endforelse
         </div>
     </div>
 </div>
+
 @endsection

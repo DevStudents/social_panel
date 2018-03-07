@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     //posts
     public function post(){
-        $this->hasMany('App\Post');
+      return  $this->hasMany('App\Post');
     }
 
     //friends

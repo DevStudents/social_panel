@@ -40,7 +40,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('post.show',compact('post'));
     }
 
     /**
@@ -51,7 +52,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('post.edit',compact('post'));
     }
 
     /**
@@ -63,7 +65,17 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'post_content' => 'required|min:5',
+        ],[
+            'required' => 'You cannot add empty post silly...',
+            'min' => "C'mon your post must be at least :min characters long..."
+        ]);
+        $post = Post::findOrFail($id);
+        $post->post_content = $request->post_content;
+
+        $post->save();
+       return redirect('users/'.$post->user->id);
     }
 
     /**
@@ -74,6 +86,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::where('id',$id)->delete();
+        return back();
     }
 }

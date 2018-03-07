@@ -24,6 +24,7 @@ Route::get('/search', 'SearchController@users');
 Route::resource('/users', 'UsersController',['except' => ['index','create','store','destroy']]);
 
 Route::resource('/posts', 'PostsController',['except' => ['index','create']]);
+Route::get('/posts/{id}/edit', 'PostsController@edit');
 
 
 Route::get('/users/{id}/friends','FriendsController@index');

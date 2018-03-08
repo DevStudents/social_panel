@@ -13,5 +13,6 @@
                 </div>
             </div>
         @endforelse
+            {{ $posts->links() }}
     </div>
 @endsection

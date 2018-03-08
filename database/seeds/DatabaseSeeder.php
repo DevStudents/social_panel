@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         //helping variables
         $number_of_users = 30;
         $password = 'test1234';
+        $max_post = 5;
+
 
 
         //loop - create 30 users with random dana
@@ -65,8 +67,18 @@ class DatabaseSeeder extends Seeder
                     ]);
 
                 }
-            }
-            
-        }
+
+            }//end of frends
+
+            for($post_id = 1;$post_id <= $faker->numberBetween(0,$max_post);$post_id++){
+                DB::table('posts')->insert([
+                    'user_id'=> $user_id,
+                    'post_content' => $faker->text($maxNbChars = 200),
+                    'created_at' => $faker->dateTimeThisYear('now'),
+                ]);
+            }//end of posts
+
+
+        }//end of user
     }
 }

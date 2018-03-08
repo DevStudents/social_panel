@@ -7,6 +7,7 @@
          <small class="pull-right">Created at: <a href="{{url('/posts/' .$post->id)}}">{{$post->created_at}}</a></small><br>
         <div style="margin-top: 10px;">{{$post->post_content}}</div>
         </div>
+        <button type="submit" class="btn btn-primary btn-sm pull-left" style="margin:10px;">Noice!</button>
         @if($post->user->id == Auth::id())
             <a href="{{url('/posts/'. $post->id .'/edit')}}" class="pull-right"><button type="submit" class="btn btn-success btn-sm pull-right"
              style="margin:10px;">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -21,8 +23,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('home');
+    public function index(){
+        $friends = Auth::user()->friends();
+
+        $friends_ids_array = [];
+        $friends_ids_array[] = Auth::id();
+
+        foreach($friends as $friend){
+            $friends_ids_array[] = $friend->id;
+        }
+
+        $posts = Post::whereIn('user_id',$friends_ids_array)->orderBy('created_at','desc')->get();
+
+        return view('post.main',compact('posts'));
     }
 }

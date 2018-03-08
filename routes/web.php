@@ -23,7 +23,7 @@ Route::get('/search', 'SearchController@users');
 
 Route::resource('/users', 'UsersController',['except' => ['index','create','store','destroy']]);
 
-Route::resource('/posts', 'PostsController',['except' => ['create']]);
+Route::resource('/posts', 'PostsController',['except' => ['index','create']]);
 
 
 

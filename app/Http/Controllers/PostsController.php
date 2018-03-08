@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
@@ -12,7 +11,7 @@ class PostsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('author',['except' => ['show','store','index']]);
+        $this->middleware('author',['except' => ['show','store']]);
     }
     /**
      * Store a newly created resource in storage.
@@ -21,11 +20,7 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      *
      */
-    public function index()
-    {
-        $all_posts = Post::orderBy('created_at','desc')->get();
-        return view('post.main',compact('all_posts'));
-    }
+
 
     public function store(Request $request)
     {

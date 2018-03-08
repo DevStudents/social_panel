@@ -32,7 +32,7 @@
                     &nbsp;
                     <!-- Branding Image -->
 
-                    <a class="navbar-brand" href="{{ url('/posts') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         See all...
                     </a>
 

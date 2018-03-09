@@ -19,10 +19,23 @@
                 <button type="submit" onclick="return confirm('Are U sure?')" class="btn btn-danger btn-sm pull-right" style="margin:10px;">Delete</button>
             </form>
         @endif
+
+
+
     </div>
     <div class="panel-body">
         @if(Auth::check())
             @include('comments.form')
         @endif
     </div>
+
+
+    @forelse($post->comment as $comment)
+            <div class="wrapper" style="padding-right: 100px;padding-bottom: 30px; margin: 20px; border-bottom: 1px solid darkseagreen">
+                <img class="img-responsive pull-left" src="{{url('/user-avatar/'.$comment->user_id.'/50')}}">
+                <a style="margin-left: 5px;" class="pull-left" href="{{url('/users/'.$comment->user_id)}}">{{$comment->user->name}} </a><br>
+                <span style="margin-left: 5px;" class="pull-left" >{{$comment->content}}</span>
+            </div>
+    @empty <h5 style="font-size: smaller">This post has no comments</h5>
+    @endforelse
 </div>

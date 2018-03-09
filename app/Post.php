@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class Post extends Model
 {
     use SoftDeletes;
@@ -17,6 +18,9 @@ class Post extends Model
 
     public function user(){
        return $this->belongsTo('App\User');
+    }
+    public function comment(){
+        return $this->hasMany('App\Comment');
     }
 
 }

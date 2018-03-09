@@ -20,4 +20,9 @@
             </form>
         @endif
     </div>
+    <div class="panel-body">
+        @if(Auth::check())
+            @include('comments.form')
+        @endif
+    </div>
 </div>

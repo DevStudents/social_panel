@@ -47,7 +47,8 @@ class CommentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        return view('comments.edit',compact('comment'));
     }
 
     /**
@@ -70,6 +71,7 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Comment::where('id',$id)->delete();
+        return back();
     }
 }

@@ -83,7 +83,7 @@ class PostsController extends Controller
         $post->post_content = $request->post_content;
 
         $post->save();
-       return redirect('users/'.$post->user->id);
+        return redirect('home#post_'.$post->id);
     }
 
     /**

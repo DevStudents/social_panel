@@ -72,7 +72,7 @@ class CommentsController extends Controller
         $comment->content = $request->comment_content;
 
         $comment->save();
-        return redirect('posts/'.$comment->post_id);
+        return redirect('home#comment_'.$comment->id);
     }
 
     /**

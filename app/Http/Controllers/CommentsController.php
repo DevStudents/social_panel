@@ -24,7 +24,7 @@ class CommentsController extends Controller
     {
         $comment_content_id = 'comment_'.$request->post_id.'_content';
         $this->validate($request,[
-            $comment_content_id  => 'required|min:5',
+            $comment_content_id  => 'required|min:2',
         ],[
             'required' => 'You cannot add empty post silly...',
             'min' => "C'mon your post must be at least :min characters long..."
@@ -60,7 +60,19 @@ class CommentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request,[
+            'comment_content' => 'required|min:2',
+        ],[
+            'required' => 'You cannot add empty comment silly...',
+            'min' => "C'mon your comment must be at least :min characters long..."
+        ]);
+
+        $comment = Comment::findOrFail($id);
+        $comment->content = $request->comment_content;
+
+        $comment->save();
+        return redirect('posts/'.$comment->post_id);
     }
 
     /**

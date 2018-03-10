@@ -3,16 +3,16 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-body">
-                <form  method="POST" action="{{url('/comments/'.$comment->id)}}">
+                <form method="post" action="{{url('/comments/'. $comment->id)}}">
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
-                    @if ($errors->has('content'))
+                    @if ($errors->has('comment_content'))
                         <span class="help-block">
-                             <strong>{{ $errors->first('content') }}</strong>
+                             <strong>{{ $errors->first('comment_content') }}</strong>
                         </span>
                     @endif
-                    <div class="form-group{{ $errors->has('content') ? ' has-error' : '' }}">
-                        <textarea class="form-control" value="{{$comment->content }}" name="post_content">{{$comment->content }}</textarea>
+                    <div class="form-group{{ $errors->has('comment_content') ? ' has-error' : '' }}">
+                        <textarea class="form-control" name="comment_content">{{$comment->content}}</textarea>
                     </div>
                     <button type="submit" class="btn btn-success btn-sm pull-right">Save changes</button>
                 </form>

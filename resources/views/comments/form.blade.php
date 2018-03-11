@@ -8,8 +8,9 @@
                      </span>
             @endif
             <div class="form-group{{ $errors->has('comment_'.$post->id.'_content') ? ' has-error' : '' }}">
-                <input class="form-control" name="{{'comment_'.$post->id.'_content'}}" placeholder="Place for your comment...">
-                <input type="hidden" class="form-control" name="post_id" value="{{$post->id}}"/>
+                <img class="img-responsive pull-left" style="margin: 10px;" src="{{url('/user-avatar/'.Auth::id().'/60')}}">
+                <input class="form-control pull-left" name="{{'comment_'.$post->id.'_content'}}" placeholder="Place for your comment...">
+                <input type="hidden" class="form-control pull-left" name="post_id" value="{{$post->id}}"/>
             </div>
             <button type="submit" class="btn btn-primary btn-sm pull-right" >Add comment</button>
         </div>

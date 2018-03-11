@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('owner',['except' => ['store']]);
+    }
     /**
      * Display a listing of the resource.
      *

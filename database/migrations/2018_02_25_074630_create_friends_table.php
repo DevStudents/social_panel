@@ -21,8 +21,7 @@ class CreateFriendsTable extends Migration
             $table->timestamps();
             $table->unique(['user_id','friend_id']);
 
-           // $table->foreign('user_id')->references('id')->on('users');
-           // $table->foreign('friend_id')->references('id')->on('users');
+
         });
     }
 

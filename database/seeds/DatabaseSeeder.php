@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Friend;
+use App\Post;
 
 class DatabaseSeeder extends Seeder
 {
@@ -76,7 +77,19 @@ class DatabaseSeeder extends Seeder
                     'post_content' => $faker->text($maxNbChars = 200),
                     'created_at' => $faker->dateTimeThisYear('now'),
                 ]);
-            }//end of posts
+
+                $posts = Post::get();
+                $counter = count($posts);
+                for($comment_id = 1;$comment_id <= $faker->numberBetween($min = 1,$max = 5 );$comment_id++){
+                    DB::table('comments')->insert([
+                        'post_id'=> $faker->numberBetween($min = 1,$max = $counter),
+                        'user_id'=> $faker->numberBetween($min = 1,$max = $number_of_users),
+                        'content' => $faker->text($maxNbChars = 90),
+                        'created_at' => $faker->dateTimeThisYear('now'),
+                    ]);
+
+                }//comments
+            }//end of posts & comments
 
 
         }//end of user

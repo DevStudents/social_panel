@@ -33,7 +33,7 @@ class HomeController extends Controller
             $friends_ids_array[] = $friend->id;
         }
 
-        $posts = Post::whereIn('user_id',$friends_ids_array)->orderBy('created_at','desc')->paginate(5);
+        $posts = Post::with('comment.user')->whereIn('user_id',$friends_ids_array)->orderBy('created_at','desc')->paginate(5);
 
         return view('post.main',compact('posts'));
     }

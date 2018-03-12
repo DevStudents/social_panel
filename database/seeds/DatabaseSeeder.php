@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
                 'email'=> str_replace('-','',str_slug($name)).'@'.$faker->safeEmailDomain,
                 'password'=> bcrypt($password),
                 'avatar' => $avatar,
+               'role_id'=> 2,
                 'sex'=> $sex,
            ]);
 
@@ -93,5 +94,12 @@ class DatabaseSeeder extends Seeder
 
 
         }//end of user
+
+            DB::table('roles')->insert([
+                'role_name'=> 'admin',
+            ]);
+             DB::table('roles')->insert([
+            'role_name'=> 'user',
+            ]);
     }
 }

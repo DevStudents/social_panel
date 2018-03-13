@@ -1,5 +1,5 @@
 
-<div class="panel panel-default" id="post_{{$post->id}}">
+<div class="panel panel-default" {{$post->trashed() ? 'style=opacity:0.3;': ''}} id="post_{{$post->id}}">
     <div class="panel-body">
         <div class="wrapper" style="padding-right: 100px;padding-bottom: 30px;">
         <img src="{{url('/user-avatar/'.$post->user->id.'/80')}}" alt="avatar" class="img-responsive pull-left" style="padding-right: 20px">

@@ -33,8 +33,19 @@ class HomeController extends Controller
             $friends_ids_array[] = $friend->id;
         }
 
-        $posts = Post::with('comment.user')->whereIn('user_id',$friends_ids_array)->orderBy('created_at','desc')->paginate(5);
-
+        if(admin()) {
+            $posts = Post::with('comment.user')
+                ->whereIn('user_id', $friends_ids_array)
+                ->orderBy('created_at', 'desc')
+                ->withTrashed()
+                ->paginate(5);
+        }
+        else{
+            $posts = Post::with('comment.user')
+                ->whereIn('user_id', $friends_ids_array)
+                ->orderBy('created_at', 'desc')
+                ->paginate(5);
+        }
         return view('post.main',compact('posts'));
     }
 }

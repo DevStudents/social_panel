@@ -48,9 +48,14 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
-        $comments = $post->comment()->get();
-        return view('post.show',compact('post','comments'));
+        if(admin()) {
+            $post = Post::with('comment.user')->withTrashed()->findOrFail($id);
+        }
+        else{
+            $post = Post::with('comment.user')->findOrFail($id);
+        }
+
+        return view('post.show',compact('post'));
     }
 
     /**

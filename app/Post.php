@@ -20,7 +20,13 @@ class Post extends Model
        return $this->belongsTo('App\User');
     }
     public function comment(){
-        return $this->hasMany('App\Comment')->orderBy('created_at','desc');
+        if(admin()){
+            return $this->hasMany('App\Comment')->withTrashed()->orderBy('created_at','desc');
+        }
+        else{
+            return $this->hasMany('App\Comment')->orderBy('created_at','desc');
+        }
+
     }
 
 }

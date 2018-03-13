@@ -1,4 +1,4 @@
-<div id="comment_{{$comment->id}}" class="wrapper" style="padding-right: 100px;padding-bottom: 30px; margin: 20px; border-bottom: 1px solid darkseagreen; {{$comment->trashed() ? 'opacity:0.3;': ''}}">
+<div id="comment_{{$comment->id}}" class="wrapper" style="padding-right: 100px;padding-bottom: 30px; margin: 20px; border-bottom: 1px solid darkseagreen; {{$comment->trashed() ? 'opacity:0.4;': ''}}">
     @if($comment->user_id == Auth::id() || admin())
         <div class="my_panel">
             <a href="{{url('/comments/'. $comment->id .'/edit')}}" class="pull-right"><button type="submit" class="btn btn-success btn-sm pull-right"

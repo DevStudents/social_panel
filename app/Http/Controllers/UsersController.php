@@ -19,10 +19,12 @@ class UsersController extends Controller
     {   $user = User::findOrFail($id);
        // $posts = $user->post()->get();
         if(admin()){
-            $posts = Post::with('comment.user')->where('user_id',$id)->withTrashed()->get();
+            $posts = Post::with(['comment','user','like'])
+                ->with(['comment.user','comment.like'])->where('user_id',$id)->withTrashed()->get();
         }
         else{
-            $posts = Post::with('comment.user')->where('user_id',$id)->get();
+            $posts = Post::with(['comment','user','like'])
+                ->with(['comment.user','comment.like'])->where('user_id',$id)->get();
         }
 
         return view('users.show',compact('user','posts'));

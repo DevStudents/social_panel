@@ -19,6 +19,7 @@ class Post extends Model
     public function user(){
        return $this->belongsTo('App\User');
     }
+
     public function comment(){
         if(admin()){
             return $this->hasMany('App\Comment')->withTrashed()->orderBy('created_at','desc');
@@ -27,6 +28,9 @@ class Post extends Model
             return $this->hasMany('App\Comment')->orderBy('created_at','desc');
         }
 
+    }
+    public function like(){
+        return $this->hasMany('App\Like');
     }
 
 }

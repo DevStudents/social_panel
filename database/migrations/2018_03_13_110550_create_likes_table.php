@@ -19,6 +19,7 @@ class CreateLikesTable extends Migration
             $table->integer('post_id')->nullable();
             $table->integer('comment_id')->nullable();
             $table->timestamps();
+
         });
     }
 

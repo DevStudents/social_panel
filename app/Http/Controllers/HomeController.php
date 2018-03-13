@@ -34,14 +34,16 @@ class HomeController extends Controller
         }
 
         if(admin()) {
-            $posts = Post::with('comment.user')
+            $posts = Post::with(['user','comment','like'])
+                ->with(['comment.user','comment.like'])
                 ->whereIn('user_id', $friends_ids_array)
                 ->orderBy('created_at', 'desc')
                 ->withTrashed()
                 ->paginate(5);
         }
         else{
-            $posts = Post::with('comment.user')
+            $posts = Post::with(['comment','user','like'])
+                ->with(['comment.user','comment.like'])
                 ->whereIn('user_id', $friends_ids_array)
                 ->orderBy('created_at', 'desc')
                 ->paginate(5);

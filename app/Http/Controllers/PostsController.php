@@ -49,10 +49,12 @@ class PostsController extends Controller
     public function show($id)
     {
         if(admin()) {
-            $post = Post::with('comment.user')->withTrashed()->findOrFail($id);
+            $post = Post::with(['comment','user','like'])
+                ->with(['comment.user','comment.like'])->withTrashed()->findOrFail($id);
         }
         else{
-            $post = Post::with('comment.user')->findOrFail($id);
+            $post = Post::with(['comment','user','like'])
+                ->with(['comment.user','comment.like'])->findOrFail($id);
         }
 
         return view('post.show',compact('post'));

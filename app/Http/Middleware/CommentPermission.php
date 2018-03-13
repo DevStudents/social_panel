@@ -25,7 +25,7 @@ class CommentPermission
         ])->exists();
 
         if((!Auth::check() || !$comment_exists )&& !admin()) {
-            abort(403,'Permission denied - it is not your comment :(');
+            abort(403,'Permission denied - it is not your comment');
         }
         return $next($request);
     }

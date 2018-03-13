@@ -26,14 +26,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    //RELATIONS
+                                            //RELATIONS
 
     //posts
     public function post(){
       return  $this->hasMany('App\Post')->orderBy('created_at','desc');
     }
+    //role
+    public function role(){
+        return  $this->belongsTo('App\Role');
+    }
 
-    //friends
+
+
 
     // friend list collection
     public function friend_1(){
@@ -47,6 +52,7 @@ class User extends Authenticatable
     public function friends(){
         return $this->friend_1->merge($this->friend_2);
     }
+
 
     //friend requests
     public function accept(){

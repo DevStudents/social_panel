@@ -24,7 +24,7 @@ class CheckPostPermission
             ['user_id',Auth::id()]
         ])->exists();
 
-        if(!Auth::check() || !$post_exists) {
+        if((!Auth::check() || !$post_exists ) && !admin()) {
             abort(403,'Permission denied - it is not your post :(');
         }
         return $next($request);

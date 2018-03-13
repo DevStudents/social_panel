@@ -46,6 +46,9 @@ use Illuminate\Support\Facades\Auth;
            return $list_user;
        }
 
+       function admin(){
+           return (Auth::check() && Auth::user()->role->role_name === 'admin');
+       }
 
 
 

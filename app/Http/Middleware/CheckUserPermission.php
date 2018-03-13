@@ -17,7 +17,7 @@ class CheckUserPermission
     public function handle($request, Closure $next)
     {
         $id = $request->user;
-        if(Auth::check() && (intval($id) !== Auth::id())){
+        if(Auth::check() && (intval($id) !== Auth::id()) && !admin()){
             abort(403,'Permission denied :(');
         }
         return $next($request);

@@ -8,7 +8,7 @@
         <div style="margin-top: 10px;">{{$post->post_content}}</div>
         </div>
         <button type="submit" class="btn btn-primary btn-sm pull-left" style="margin:10px;">Noice!</button>
-        @if($post->user->id == Auth::id())
+        @if($post->user->id == Auth::id() || admin())
             <a href="{{url('/posts/'. $post->id .'/edit')}}" class="pull-right"><button type="submit" class="btn btn-success btn-sm pull-right"
              style="margin:10px;">
                     Edit

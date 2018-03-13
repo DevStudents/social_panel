@@ -42,5 +42,5 @@ Route::patch('/friends/{friend}','FriendsController@accept');
 Route::delete('/friends/{id}','FriendsController@delete');
 
 Route::post('/like','LikesController@add');
-Route::delete('/like/{id}','LikesController@destroy');
+Route::delete('/like','LikesController@destroy');
 

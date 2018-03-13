@@ -7,11 +7,7 @@
          <small class="pull-right">Created at: <a href="{{url('/posts/' .$post->id)}}">{{$post->created_at}}</a></small><br>
         <div style="margin-top: 10px;">{{$post->post_content}}</div>
         </div>
-        <form method="post" action="{{url('/like')}}">
-            {{csrf_field()}}
-            <input type="hidden" name="post_id" value="{{$post->id}}">
-            <button type="submit" class="btn btn-primary btn-sm pull-left" style="margin:10px;">{{$post->like->count()}} Noice!</button>
-        </form>
+
         @if($post->user->id == Auth::id() || admin())
             <a href="{{url('/posts/'. $post->id .'/edit')}}" class="pull-right"><button type="submit" class="btn btn-success btn-sm pull-right"
              style="margin:10px;">
@@ -23,6 +19,8 @@
                 <button type="submit" onclick="return confirm('Are U sure?')" class="btn btn-danger btn-sm pull-right" style="margin:10px;">Delete</button>
             </form>
         @endif
+
+        @include('post.likes')
 
 
 

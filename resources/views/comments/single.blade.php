@@ -12,11 +12,7 @@
             </form>
         </div>
     @endif
-        <form method="post" action="{{url('/like')}}">
-            {{csrf_field()}}
-            <input type="hidden" name="comment_id" value="{{$comment->id}}">
-            <button type="submit" class="btn btn-primary btn-sm pull-right" style="margin:10px;">{{$comment->like->count()}} Noice!</button>
-        </form>
+   @include('comments.likes')
     <img class="img-responsive pull-left" src="{{url('/user-avatar/'.$comment->user_id.'/50')}}">
     <a style="margin-left: 5px;" class="pull-left" href="{{url('/users/'.$comment->user_id)}}">{{$comment->user->name}} </a><br>
     <span style="margin-left: 5px;" class="pull-left" >{{$comment->content}}</span>

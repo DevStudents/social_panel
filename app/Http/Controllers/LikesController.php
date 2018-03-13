@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class LikesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function add(Request $request){
         Like::create([
             'user_id' => Auth::id(),
@@ -17,7 +21,13 @@ class LikesController extends Controller
         return back();
     }
 
-    public function destroy(){
+    public function destroy(Request $request){
+        Like::where([
+            'user_id' => Auth::id(),
+            'post_id' => $request->post_id,
+            'comment_id' => $request->comment_id,
+        ])->delete();
 
+        return back();
     }
 }

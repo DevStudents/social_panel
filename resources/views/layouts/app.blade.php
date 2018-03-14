@@ -101,9 +101,9 @@
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    @if(count(Auth::user()->accept()) > 0)
+                                    @if(count(Auth::user()->unreadNotifications) > 0)
                                         <b style="color: red">Notifications</b>
-                                        <b style="color: red">({{count(Auth::user()->accept())}})</b>
+                                        <b style="color: red">({{count(Auth::user()->unreadNotifications)}})</b>
                                     @else
                                         Notifications
                                     @endif
@@ -111,11 +111,10 @@
                                 </a>
 
                                 <ul class="dropdown-menu list-group">
-                                    @forelse(Auth::user()->accept() as $to_accept)
-                                        <a  class="list-group-item" href="{{url('/users/'.$to_accept->id)}}">
+                                    @forelse(Auth::user()->unreadNotifications as $note)
                                          <li style="font-size: smaller">
-                                         <b>{{$to_accept->name}}</b>
-                                         sent you a friend request</li></a>
+                                         <b>{{$note->data['data']}}</b>
+                                         </li>
                                     @empty <h5 style="font-size: smaller">Nothing new...</h5>
                                     @endforelse
                                 </ul>

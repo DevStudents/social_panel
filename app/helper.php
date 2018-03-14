@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Auth;
         }
     }
 
-       function to_accept($id){
+            function to_accept($id){
            $to_accept = Friend::where([
                ['friend_id','=', Auth::id()],
                 ['user_id','=',$id]
@@ -36,15 +36,7 @@ use Illuminate\Support\Facades\Auth;
                return 2;
            }
        }
-       function accept_list(){
-          $friend_request = User::findOrFail(Auth::id())->accept();
-          return $friend_request;
-       }
-       function friends_index($id)
-       {
-           $list_user = User::findOrFail($id)->friends();
-           return $list_user;
-       }
+
 
        function admin(){
            return (Auth::check() && Auth::user()->role->role_name === 'admin');

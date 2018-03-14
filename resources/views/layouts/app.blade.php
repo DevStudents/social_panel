@@ -101,9 +101,9 @@
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    @if(count(accept_list()) > 0)
+                                    @if(count(Auth::user()->accept()) > 0)
                                         <b style="color: red">Notifications</b>
-                                        <b style="color: red">({{count(accept_list())}})</b>
+                                        <b style="color: red">({{count(Auth::user()->accept())}})</b>
                                     @else
                                         Notifications
                                     @endif
@@ -111,7 +111,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu list-group">
-                                    @forelse(accept_list() as $to_accept)
+                                    @forelse(Auth::user()->accept() as $to_accept)
                                         <a  class="list-group-item" href="{{url('/users/'.$to_accept->id)}}">
                                          <li style="font-size: smaller">
                                          <b>{{$to_accept->name}}</b>

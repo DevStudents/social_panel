@@ -55,7 +55,7 @@ class FriendRequest extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => 'Masz zaproszenie do grona znajomych',
         ];
     }
 }

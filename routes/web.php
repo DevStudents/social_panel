@@ -52,3 +52,4 @@ Route::delete('/like','LikesController@destroy');
                  //NOTIFICATIONS
 
 Route::get('/notifications','NotificationsController@index');
+Route::patch('/notifications/{id}','NotificationsController@update');

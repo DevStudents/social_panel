@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use App\User;
@@ -16,7 +17,13 @@ class NotificationsController extends Controller
     }
 
     public function index(){
-        Auth::user()->notifications->markAsRead();
         return view('users.notifications');
+    }
+    public function update($id){
+       DatabaseNotification::where([
+           'id' => $id,
+           'notifiable_id' => Auth::id(),
+           ])->firstOrFail()->markAsRead();
+       return back();
     }
 }

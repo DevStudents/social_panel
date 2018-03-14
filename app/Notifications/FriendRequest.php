@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Auth;
 
 class FriendRequest extends Notification
 {
@@ -56,6 +57,8 @@ class FriendRequest extends Notification
     {
         return [
             'message' => 'Masz zaproszenie do grona znajomych',
+            'user_id' => Auth::id(),
+            'user_name' => Auth::user()->name,
         ];
     }
 }

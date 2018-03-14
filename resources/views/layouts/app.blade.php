@@ -113,7 +113,7 @@
                                 <ul class="dropdown-menu list-group">
                                     @forelse(Auth::user()->unreadNotifications as $note)
                                          <li style="font-size: smaller">
-                                         <b>{{$note->data['data']}}</b>
+                                         <b>{{$note->data['message'] .' : '}}</b><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a>
                                          </li>
                                     @empty <h5 style="font-size: smaller">Nothing new...</h5>
                                     @endforelse

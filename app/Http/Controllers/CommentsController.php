@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use App\Post;
+use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\PostComment;
 
 class CommentsController extends Controller
 {
@@ -36,12 +39,19 @@ class CommentsController extends Controller
             'min' => "C'mon your post must be at least :min characters long..."
         ]);
 
-        Comment::create([
+        $comment = Comment::create([
             'user_id' => Auth::id(),
             'post_id' => $request->post_id,
             'content' => $request->$comment_content_id,
         ]);
 
+
+        $post = Post::findOrFail($request->post_id);
+
+
+        if($post->user_id != Auth::id()) {
+            User::findOrFail($post->user_id)->notify(new PostComment($request->post_id,$comment->id));
+        }
         return back();
     }
 

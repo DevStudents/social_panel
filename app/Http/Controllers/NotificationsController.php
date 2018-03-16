@@ -26,4 +26,10 @@ class NotificationsController extends Controller
            ])->firstOrFail()->markAsRead();
        return back();
     }
+
+    public function clickToMark(){
+       DatabaseNotification::where('notifiable_id',Auth::id())->get()->markAsRead();
+       return back();
+    }
 }
+

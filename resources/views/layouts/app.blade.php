@@ -102,12 +102,17 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     @if(count(Auth::user()->unreadNotifications) > 0)
-                                        <b style="color: red">Notifications</b>
-                                        <b style="color: red">({{count(Auth::user()->unreadNotifications)}})</b>
+                                        <form method="post" action="{{url('/notifications')}}" style="margin:0px; padding: 0px;">
+                                            {{csrf_field()}}
+                                            {{method_field('PATCH')}}
+                                            <button type="submit" class="btn btn-link" style="margin:0px; padding: 0px;"> Notifications
+                                                <b style="color: red;margin:0px; padding: 0px;">({{count(Auth::user()->unreadNotifications)}})</b>
+                                            </button>
+                                        </form>
                                     @else
                                         Notifications
                                     @endif
-                                    <span class="caret"></span>
+                                    <span class="caret" style="padding: 0px;margin: 0px"></span>
                                 </a>
 
                                 <ul class="dropdown-menu list-group">

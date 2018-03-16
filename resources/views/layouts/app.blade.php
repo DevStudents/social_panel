@@ -112,9 +112,13 @@
 
                                 <ul class="dropdown-menu list-group">
                                     @forelse(Auth::user()->unreadNotifications as $note)
+                                        @if($note->data['link'])
+                                            <a href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}">{{$note->data['message'].':'.$note->data['user_name']}}</a>
+                                        @else
                                          <li style="font-size: smaller">
                                          <b>{{$note->data['message'] .' : '}}</b><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a>
                                          </li>
+                                        @endif
                                     @empty <h5 style="font-size: smaller">Nothing new...</h5>
                                     @endforelse
                                 </ul>

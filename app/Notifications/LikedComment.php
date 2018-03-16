@@ -5,10 +5,10 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Auth;
 
-class PostComment extends Notification
+class LikedComment extends Notification
 {
     use Queueable;
 
@@ -16,6 +16,7 @@ class PostComment extends Notification
      * Create a new notification instance.
      *
      * @return void
+     *
      */
 
     protected $post_id;
@@ -23,8 +24,8 @@ class PostComment extends Notification
 
     public function __construct($post_id,$comment_id)
     {
-        $this->post_id = $post_id;
-        $this->comment_id = $comment_id;
+       $this->post_id = $post_id;
+       $this->comment_id = $comment_id;
     }
 
     /**
@@ -58,16 +59,14 @@ class PostComment extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray()
+    public function toArray($notifiable)
     {
-
         return [
-            'message' => 'Twoj post został skomentowany przez:',
+            'message' => 'Your comment is liked by: ',
             'post_id' => $this->post_id,
             'comment_id' => $this->comment_id,
             'user_id' => Auth::id(),
             'user_name' => Auth::user()->name,
-            'link' => 'post_comment',
         ];
     }
 }

@@ -9,18 +9,26 @@
                     @forelse(Auth::user()->notifications as $note)
                         @if($note->read_at)
                         <div class="col-md-3 col-sm-4 col-xs-6" style="align-items: center; opacity: 0.5;">
-                                <b>{{$note->data['message'] .' : '}}</b>
+                            @if($note->data['link'])
+                                <a href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}">{{$note->data['message'].':'.$note->data['user_name']}}</a>
+                            @else
+                            <b>{{$note->data['message'] .' : '}}</b>
                             <a href="{{url('/users/'.$note->data['user_id'])}}">
                                     {{$note->data['user_name']}}
                                 <img class="img-responsive" src="{{url('/user-avatar/'.$note->data['user_id'].'/250')}}" alt="User avatar">
                              </a>
+                             @endif
                         </div>
                         @else
                         <div class="col-md-3 col-sm-4 col-xs-6" style="align-items: center;">
+                            @if($note->data['link'])
+                                <a href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}">{{$note->data['message'].':'.$note->data['user_name']}}</a>
+                            @else
                               <a href="{{url('/users/'.$note->data['user_id'])}}">
                                   <img class="img-responsive" src="{{url('/user-avatar/'.$note->data['user_id'].'/250')}}" alt="User avatar">
                                   <b>{{$note->data['message'] .' : '.$note->data['user_name']}}</b>
                               </a>
+                            @endif
                             <form method="post" action="{{url('/notifications/'.$note->id)}}">
                                 {{csrf_field()}}
                                 {{method_field('PATCH')}}

@@ -56,7 +56,7 @@ class FriendRequest extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => 'Masz zaproszenie do grona znajomych',
+            'message' => 'Friend request from:',
             'user_id' => Auth::id(),
             'user_name' => Auth::user()->name,
         ];

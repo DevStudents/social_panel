@@ -58,7 +58,7 @@ class FriendAccepted extends Notification
     public function toArray()
     {
         return [
-            'message' => 'Zaproszenie zaakceptowane przez: ' ,
+            'message' => 'Friend request accepted: ' ,
             'user_id' => Auth::id(),
             'user_name' => Auth::user()->name,
         ];

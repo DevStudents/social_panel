@@ -112,13 +112,16 @@
 
                                 <ul class="dropdown-menu list-group">
                                     @forelse(Auth::user()->unreadNotifications as $note)
-                                        @if($note->data['link'])
-                                            <a href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}">{{$note->data['message'].':'.$note->data['user_name']}}</a>
-                                        @else
-                                         <li style="font-size: smaller">
-                                         <b>{{$note->data['message'] .' : '}}</b><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a>
-                                         </li>
+                                         @if(!empty($note->data['comment_id']))
+                                            <a href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a>
+                                         @elseif(!empty($note->data['post_id']))
+                                                <a href="{{url('posts/'.$note->data['post_id'])}}"> <b>{{$note->data['message'] .' : '}}</b></a><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a>
+                                         @elseif(empty($note->data['comment_id']) && !empty($note->data['post_id']))
+                                                <a href="{{url('posts/'.$note->data['post_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a>
+                                         @else
+                                                <a href="{{url('/users/'.$note->data['user_id'])}}"><b>{{$note->data['message'] .' : '}}</b>{{$note->data['user_name']}}</a>
                                         @endif
+
                                     @empty <h5 style="font-size: smaller">Nothing new...</h5>
                                     @endforelse
                                 </ul>

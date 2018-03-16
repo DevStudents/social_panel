@@ -62,12 +62,11 @@ class PostComment extends Notification
     {
 
         return [
-            'message' => 'Twoj post został skomentowany przez:',
+            'message' => 'Your post has been commented by:',
             'post_id' => $this->post_id,
             'comment_id' => $this->comment_id,
             'user_id' => Auth::id(),
             'user_name' => Auth::user()->name,
-            'link' => 'post_comment',
         ];
     }
 }

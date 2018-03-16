@@ -19,21 +19,32 @@ class LikesController extends Controller
         $this->middleware('auth');
     }
     public function add(Request $request){
-        Like::create([
+       Like::create([
             'user_id' => Auth::id(),
             'post_id' => $request->post_id,
             'comment_id' => $request->comment_id,
         ]);
 
 
-        if(!empty($request->comment_id)){
-            $comment = Comment::where('id',$request->comment_id);
-            User::findOrFail($comment->user_id)->notify(new LikedComment($request->post_id,$request->comment_id));
+
+        $comment = $request->comment_id;
+
+        if(is_null($comment)){
+            $post = Post::findOrFail($request->post_id);
+            if($post->user_id != Auth::id()) {
+                User::findOrFail($post->user_id)->notify(new LikedPost($post->id));
+            }
         }
+
         else{
-            $post = Post::where('id',$request->post_id);
-            User::findOrFail($post->user_id)->notify(new LikedPost($request->post_id));
+            $comment = Comment::findOrFail($request->comment_id);
+            $post = $comment->post->id;
+            if($comment->user_id != Auth::id())
+            User::findOrFail($comment->user_id)->notify(new LikedComment($post,$comment->id));
         }
+
+
+
         return back();
     }
 

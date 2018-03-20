@@ -106,7 +106,7 @@
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}
                                             <button type="submit" class="btn btn-link" style="margin:0px; padding: 0px;"> Notifications
-                                                <b style="color: red;margin:0px; padding: 0px;">({{count(Auth::user()->unreadNotifications)}})</b>
+                                                <b style="color: #0c9163;margin:0px; padding: 0px;">({{count(Auth::user()->unreadNotifications)}})</b>
                                             </button>
                                         </form>
                                     @else
@@ -118,13 +118,13 @@
                                 <ul class="dropdown-menu list-group">
                                     @forelse(Auth::user()->unreadNotifications as $note)
                                          @if(!empty($note->data['comment_id']))
-                                            <a href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a>
+                                            <a class="text-justify" href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a>
                                          @elseif(!empty($note->data['post_id']))
-                                                <a href="{{url('posts/'.$note->data['post_id'])}}"> <b>{{$note->data['message'] .' : '}}</b></a><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a>
+                                                <a class="text-justify"  href="{{url('posts/'.$note->data['post_id'])}}"> <b>{{$note->data['message'] .' : '}}</b></a><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a>
                                          @elseif(empty($note->data['comment_id']) && !empty($note->data['post_id']))
-                                                <a href="{{url('posts/'.$note->data['post_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a>
+                                                <a class="text-justify"  href="{{url('posts/'.$note->data['post_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a>
                                          @else
-                                                <a href="{{url('/users/'.$note->data['user_id'])}}"><b>{{$note->data['message'] .' : '}}</b>{{$note->data['user_name']}}</a>
+                                                <a class="text-justify"  href="{{url('/users/'.$note->data['user_id'])}}"><b>{{$note->data['message'] .' : '}}</b>{{$note->data['user_name']}}</a>
                                         @endif
 
                                     @empty <h5 style="font-size: smaller">Nothing new...</h5>

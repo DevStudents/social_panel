@@ -2,10 +2,13 @@
 <div class="panel panel-default" {{$post->trashed() ? 'style=opacity:0.4;': ''}} id="post_{{$post->id}}">
     <div class="panel-body">
         <div class="wrapper" style="padding-right: 100px;padding-bottom: 30px;">
+            <div class="avatar" style="padding: 10px;">
         <img src="{{url('/user-avatar/'.$post->user->id.'/80')}}" alt="avatar" class="img-responsive pull-left" style="padding-right: 20px">
          <span><a href="{{url('/users/' .$post->user->id)}}">{{$post->user->name}}</a></span>
-         <small class="pull-right">Created at: <a href="{{url('/posts/' .$post->id)}}">{{$post->created_at}}</a></small><br>
-        <div style="margin-top: 10px;">{{$post->post_content}}</div>
+
+         <small class="pull-right">Created at: <a href="{{url('/posts/' .$post->id)}}">{{$post->created_at}}</a></small>
+            </div><br>
+        <div class="text-justify"  style="margin: 20px;">{{$post->post_content}}</div>
         </div>
 
         @if($post->user->id == Auth::id() || admin())

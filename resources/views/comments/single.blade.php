@@ -1,4 +1,4 @@
-<div id="comment_{{$comment->id}}" class="wrapper" style="padding-right: 100px;padding-bottom: 30px; margin: 20px; border-bottom: 1px solid darkseagreen; {{$comment->trashed() ? 'opacity:0.4;': ''}}">
+<div id="comment_{{$comment->id}}" class="wrapper" style="padding-right: 100px; margin: 10px; border-top: 1px solid #58b875; {{$comment->trashed() ? 'opacity:0.4;': ''}}">
     @if($comment->user_id == Auth::id() || admin())
         <div class="my_panel">
             <a href="{{url('/comments/'. $comment->id .'/edit')}}" class="pull-right"><button type="submit" class="btn btn-success btn-sm pull-right"
@@ -13,8 +13,8 @@
         </div>
     @endif
    @include('comments.likes')
-    <img class="img-responsive pull-left" src="{{url('/user-avatar/'.$comment->user_id.'/50')}}">
+    <img class="img-fluid pull-left" style="border-left: 1px solid #58b875; margin-right: 5px;"  src="{{url('/user-avatar/'.$comment->user_id.'/52')}}">
     <a style="margin-left: 5px;" class="pull-left" href="{{url('/users/'.$comment->user_id)}}">{{$comment->user->name}} </a><br>
-    <span style="margin-left: 5px;" class="pull-left" >{{$comment->content}}</span>
+    <p class="text-justify"   class="pull-left" >{{$comment->content}}</p>
 
 </div>

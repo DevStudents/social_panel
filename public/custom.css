@@ -6,14 +6,29 @@ html, body{
     background-position: center;
     height: auto;
     position: relative;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+
 }
+
 body::before{
     content: '';
     height: 100%;
     width: 100%;
     background-color: rgba(174, 183, 174, 0.3);
     position: absolute;
+    padding: 0px;
+    margin: 0px;
 
+}
+body{
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    margin: 0;
 }
 
 .full-height {
@@ -36,18 +51,19 @@ body::before{
 }
 
 .title {
-    font-size: 8rem;
+    font-size: 7rem;
     flex-grow: 1;
+    padding: 10px;
 }
 
 .links{
     display: flex;
     text-align: center;
+
 }
 .links > a {
     color: #636b6f;
-    padding: 0 25px;
-    font-size: 12px;
+    font-size: 2rem;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
@@ -58,9 +74,9 @@ body::before{
     background-color: transparent;
     border: 2px solid #a2e61b;
     color: #666e66;
+    width: 150px;
     border-radius: 30px;
-    font-size: 30px;
-    width: 10px;
+    font-size: 2rem;
     flex-grow: 1;
 }
 .links a:hover{
@@ -72,10 +88,10 @@ body::before{
 }
 .skewedBox{
     transform: skew(0deg,8deg) translateY(-20px);
-    background-color: white;
+    background-color: #ffffffad;
     padding: 200px;
-    width: 100%;
     height: 24%;
+    width: 100%;
 }
 .content{
     transform: skew(0deg,-8deg);
@@ -107,4 +123,45 @@ body::before{
 a.dropdown-toggle{
 min-width: 200px!important;
     text-align: center!important;
+    position: absolute;
+}
+.flex-navbar{
+    display: flex;
+    text-align: center;
+    //position: relative;
+}
+.flex-navbar a{
+    flex-grow: 1;
+}
+.form-inline{
+   flex-grow: 1;
+    text-align: left;
+    margin: 0px;
+    padding: 5px;
+
+}
+.form-inline .btn-outline-default{
+    background-color: transparent;
+    border: 2px solid #a2e61b;
+    color: #666e66;
+    width: 90px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    padding: 5px;
+}
+.form-inline .btn-outline-default:hover, active{
+    background: #a2e61b;
+    transition: 0.3s;
+}
+.navbar-default .navbar-brand{
+    font-size: 3rem;
+    padding: 20px;
+}
+.text-justify {
+    color: #6d9225;
+    text-decoration: none;
+}
+.text-justify a:hover{
+    color: #242624;
+    text-decoration: none;
 }

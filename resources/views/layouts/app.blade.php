@@ -8,15 +8,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>NOICE!</title>
 
     <!-- Styles -->
     <link href="{{ asset('custom.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico')}}">
 </head>
 
 <body>
-<div class="blur">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -33,29 +33,28 @@
 
                     &nbsp;
                     <!-- Branding Image -->
-
-                    <a class="navbar-brand" href="{{ url('/home') }}">
-                        See all...
+                    <a class="navbar-brand"  href="{{ url('/home') }}">
+                        WALL
                     </a>
 
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        NOICE!
                     </a>
-
-
 
                 </div>
 
-                <form method="get" action="{{url('/search')}}" class="form-inline">
-                    <input class="form-control" name="q" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-default" type="submit">Search</button>
-                </form>
 
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+
+                <div class="collapse navbar-collapse flex-navbar" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
 
 
+
+                    <form method="get" action="{{url('/search')}}" class="form-inline">
+                        <input class="form-control" name="q" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-default" type="submit">Search</button>
+                    </form>
 
 
                     <!-- Right Side Of Navbar -->
@@ -120,13 +119,13 @@
                                 <ul class="dropdown-menu">
                                     @forelse(Auth::user()->unreadNotifications as $note)
                                          @if(!empty($note->data['comment_id']))
-                                            <li><a href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a></li>
-                                         @elseif(!empty($note->data['post_id']))
-                                             <li><a href="{{url('posts/'.$note->data['post_id'])}}"> <b>{{$note->data['message'] .' : '}}</b></a><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a></li>
+                                            <li><p class="text-justify"><a class="text-justify" href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}">{{$note->data['message']}}</a><br><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a></p></li>
+                                         @elseif(!empty($note->data['post_id']))<p>
+                                            <li><p class="text-justify"><a class="text-justify" href="{{url('posts/'.$note->data['post_id'])}}">{{$note->data['message'] }}</a><br><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a></p></li>
                                         @elseif(empty($note->data['comment_id']) && !empty($note->data['post_id']))
-                                             <li><a href="{{url('posts/'.$note->data['post_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a></li>
+                                             <li><p class="text-justify"><a href="{{url('posts/'.$note->data['post_id'])}}">{{$note->data['message']}}<br>{{$note->data['user_name']}}</a></p></li>
                                         @else
-                                             <li><a  href="{{url('/users/'.$note->data['user_id'])}}"><b>{{$note->data['message'] .' : '}}</b>{{$note->data['user_name']}}</a></li>
+                                             <li><p class="text-justify"><a  href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['message']}}<br>{{$note->data['user_name']}}</a></p></li>
                                         @endif
 
                                     @empty <li><a>Nothing new...</a></li>
@@ -143,7 +142,6 @@
         @yield('content')
     </div>
 
-</div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

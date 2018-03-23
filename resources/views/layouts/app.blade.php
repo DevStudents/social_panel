@@ -52,7 +52,7 @@
 
 
                     <form method="get" action="{{url('/search')}}" class="form-inline">
-                        <input class="form-control" name="q" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control" name="q" type="search" placeholder="Search It Noice..." aria-label="Search">
                         <button class="btn btn-outline-default" type="submit">Search</button>
                     </form>
 

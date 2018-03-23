@@ -30,7 +30,7 @@
         <div class="skewedBox">
             <div class="content">
                 <div class="title m-b-md">
-                    NOICE!
+                   <span>NOICE!</span>
                     <div class="links">
                         @if (Route::has('login'))
                             @auth

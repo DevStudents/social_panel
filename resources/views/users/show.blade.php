@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container blur-container">
     <div class="row">
         @include('layouts.sidebar')
         <div class="col-md-8">

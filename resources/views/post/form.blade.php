@@ -1,3 +1,4 @@
+
 <div class="panel panel-default">
     <form  method="POST" action="{{url('/posts')}}">
         {{csrf_field()}}

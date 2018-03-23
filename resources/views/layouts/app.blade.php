@@ -11,10 +11,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('custom.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
+<div class="blur">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -67,7 +69,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                 {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -105,29 +107,29 @@
                                         <form method="post" action="{{url('/notifications')}}" style="margin:0px; padding: 0px;">
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}
-                                            <button type="submit" class="btn btn-link" style="margin:0px; padding: 0px;"> Notifications
+                                            <button type="submit" class="btn btn-link" style="margin:0px; padding: 0px;">Your notifications
                                                 <b style="color: #0c9163;margin:0px; padding: 0px;">({{count(Auth::user()->unreadNotifications)}})</b>
                                             </button>
                                         </form>
                                     @else
-                                        Notifications
+                                        Your notifications
                                     @endif
                                     <span class="caret" style="padding: 0px;margin: 0px"></span>
                                 </a>
 
-                                <ul class="dropdown-menu list-group">
+                                <ul class="dropdown-menu">
                                     @forelse(Auth::user()->unreadNotifications as $note)
                                          @if(!empty($note->data['comment_id']))
-                                            <a class="text-justify" href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a>
+                                            <li><a href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a></li>
                                          @elseif(!empty($note->data['post_id']))
-                                                <a class="text-justify"  href="{{url('posts/'.$note->data['post_id'])}}"> <b>{{$note->data['message'] .' : '}}</b></a><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a>
-                                         @elseif(empty($note->data['comment_id']) && !empty($note->data['post_id']))
-                                                <a class="text-justify"  href="{{url('posts/'.$note->data['post_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a>
-                                         @else
-                                                <a class="text-justify"  href="{{url('/users/'.$note->data['user_id'])}}"><b>{{$note->data['message'] .' : '}}</b>{{$note->data['user_name']}}</a>
+                                             <li><a href="{{url('posts/'.$note->data['post_id'])}}"> <b>{{$note->data['message'] .' : '}}</b></a><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a></li>
+                                        @elseif(empty($note->data['comment_id']) && !empty($note->data['post_id']))
+                                             <li><a href="{{url('posts/'.$note->data['post_id'])}}"><b>{{$note->data['message'].':'}}</b>{{$note->data['user_name']}}</a></li>
+                                        @else
+                                             <li><a  href="{{url('/users/'.$note->data['user_id'])}}"><b>{{$note->data['message'] .' : '}}</b>{{$note->data['user_name']}}</a></li>
                                         @endif
 
-                                    @empty <h5 style="font-size: smaller">Nothing new...</h5>
+                                    @empty <li><a>Nothing new...</a></li>
                                     @endforelse
                                 </ul>
                             </li>
@@ -141,6 +143,7 @@
         @yield('content')
     </div>
 
+</div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

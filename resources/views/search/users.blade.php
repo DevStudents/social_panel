@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
-        <div class="row">
-            <div class="container">
+
+            <div class="container blur-container">
+                <div class="row">
             <div class="col-md-12" style="text-align: center;">
                     <h1>Search Results</h1>
                     @forelse($results as $result)

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-        <div class="container">
+        <div class="container blur-container">
             <div class="col-md-12" style="text-align: center;">
                 @if(count($user->friends()) > 0)
                     <h1>Number of friends: {{(count($user->friends()))}}</h1>

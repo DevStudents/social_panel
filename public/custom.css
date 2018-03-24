@@ -105,10 +105,12 @@ body{
 }
 .skewedBox{
     transform: skew(0deg,8deg) translateY(-20px);
-    background-color: #ffffffad;
+    background-color: #ffffff;
     padding: 200px;
     height: 24%;
     width: 100%;
+    background: linear-gradient(to right, #e4e4e4 -10%, white 26%, white 75%,#ecebeb 110%);
+    background-color: white;
 }
 .content{
     transform: skew(0deg,-8deg);
@@ -181,4 +183,10 @@ min-width: 200px!important;
 .text-justify a:hover{
     color: #242624;
     text-decoration: none;
+}
+.fixed-btn{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: none;
 }

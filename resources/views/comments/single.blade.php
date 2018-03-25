@@ -1,4 +1,5 @@
 <div id="comment_{{$comment->id}}" class="wrapper-comment {{$comment->trashed() ? 'disabled': ''}}">
+
     @if($comment->user_id == Auth::id() || admin())
         <div class="btn-group pull-right">
             <button class="btn btn-secondary btn-sm dropdown-toggle options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

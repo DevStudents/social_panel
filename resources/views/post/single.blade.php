@@ -2,9 +2,12 @@
 <div class="panel panel-default{{$post->trashed() ? ' disabled': ''}}" id="post_{{$post->id}}">
     <div class="panel-body">
          <p class="text-justify created-time"><small class="pull-right">Created at: <a href="{{url('/posts/' .$post->id)}}">{{$post->created_at}}</a></small></p>
-        <div class="wrapper">
-            <div class="avatar">
+        <div class="col-md-12 wrapper">
+            <div class="col-md-2">
         <img src="{{url('/user-avatar/'.$post->user->id.'/100')}}" alt="avatar" class="img-responsive pull-left post-avatar" style="padding-right: 20px">
+            </div>
+            <div class="col-md-10">
+                <div class="row">
         <div class="data">
 
         @if($post->user->id == Auth::id() || admin())
@@ -27,13 +30,15 @@
         @endif
 
         @include('post.likes')
-         <p class="name-post pull-left"><span><a href="{{url('/users/' .$post->user->id)}}">{{$post->user->name}}</a></span></p>
+         <h5 class="name-post pull-left"><a href="{{url('/users/' .$post->user->id)}}">{{$post->user->name}}</a></h5>
 
         </div>
-            </div>
-
+                </div>
+                <div class="row">
         <div class="text-post">
-        <p>{{$post->post_content}}</p>
+        <article>{{$post->post_content}}</article>
+        </div>
+                </div>
         </div>
         </div>
 

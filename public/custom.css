@@ -268,3 +268,32 @@ a{
 .text-justify{
     color: #242624;
 }
+.button-add-comment{
+    border: none;
+    background-color: #679513;
+    border-radius: 15px;
+    color: whitesmoke;
+    margin: 10px 20px 10px 20px;
+}
+.btn-primary-post{
+    margin: 2px!important;
+    background-color: #a2e61b;
+}
+.btn-primary{
+    border-radius: 10px!important;
+    background-color: #7eb41a!important;
+    border: none!important;
+}
+.btn-danger{
+    border-radius: 10px!important;
+    background-color: crimson!important;
+    border:none!important;
+}
+.row .pagination .active span,.row .pagination .active span:hover{
+    background-color: #a2e61b;
+    border-color: #a2e61b;
+}
+.row .pagination  li a:hover{
+    background-color: #a2e61b;
+    border-color: #a2e61b;
+}

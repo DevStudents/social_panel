@@ -15,15 +15,22 @@
         </div>
 
         @if($post->user->id == Auth::id() || admin())
-            <a href="{{url('/posts/'. $post->id .'/edit')}}" class="pull-right"><button type="submit" class="btn btn-success btn-sm pull-right"
+            <div class="btn-group pull-right">
+                <button class="btn btn-secondary  dropdown-toggle options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Options
+                </button>
+                <div class="dropdown-menu">
+            <a href="{{url('/posts/'. $post->id .'/edit')}}" class="pull-left"><button type="submit" class="btn btn-link  pull-right"
              style="margin:10px;">
                     Edit
              </button></a>
             <form method="post" action="{{url('/posts/'.$post->id)}}">
                 {{csrf_field()}}
                 {{method_field('DELETE')}}
-                <button type="submit" onclick="return confirm('Are U sure?')" class="btn btn-danger btn-sm pull-right" style="margin:10px;">Delete</button>
+                <button type="submit" onclick="return confirm('Are U sure?')" class="btn btn-link pull-left" style="margin:10px;">Delete</button>
             </form>
+                </div>
+            </div>
         @endif
 
         @include('post.likes')

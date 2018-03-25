@@ -15,7 +15,7 @@
                     <div class="form-group{{ $errors->has('comment_content') ? ' has-error' : '' }}">
                         <textarea class="form-control" name="comment_content">{{$comment->content}}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-success btn-sm pull-right">Save changes</button>
+                    <button type="submit" class="button-add-comment btn-sm pull-right">Save changes</button>
                 </form>
             </div>
         </div>

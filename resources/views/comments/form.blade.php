@@ -10,6 +10,6 @@
                 <img class="img-responsive pull-left comment-img"  src="{{url('/user-avatar/'.Auth::id().'/65')}}">
                 <textarea class="form-control pull-left" name="{{'comment_'.$post->id.'_content'}}"></textarea>
                 <input type="hidden" class="form-control pull-left" name="post_id" value="{{$post->id}}"/>
-            </div>
             <button type="submit" class="button-add-comment btn-sm pull-right" >Add comment</button>
+            </div>
     </form>

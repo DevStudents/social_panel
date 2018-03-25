@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-            <div class="container">
+            <div class="container blur-container">
                 <div class="col-md-12" style="text-align: center;">
                     @if(count(Auth::user()->notifications) > 0)
                         <h1>Number of notifications: {{(count(Auth::user()->notifications))}}</h1>

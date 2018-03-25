@@ -17,17 +17,40 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+                //USERS
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/search', 'SearchController@users');
 
+Route::get('/user-avatar/{id}/{size}','ImagesController@user_avatar');
+
+
+
 Route::resource('/users', 'UsersController',['except' => ['index','create','store','destroy']]);
 
+Route::resource('/posts', 'PostsController',['except' => ['index','create']]);
 
-Route::get('/friends/{id}','FriendsController@index');
-//Route::get('/friends/{id}','FriendsController@friend_list');
+Route::resource('/comments', 'CommentsController',['except' => ['index','create','show']]);
+
+
+                 //FREIENDS
+Route::get('/users/{id}/friends','FriendsController@index');
+
 Route::post('/friends/{friend}','FriendsController@add');
+
 Route::patch('/friends/{friend}','FriendsController@accept');
+
 Route::delete('/friends/{id}','FriendsController@delete');
 
-Route::get('/user-avatar/{id}/{size}','ImagesController@user_avatar');
+                   //LIKES
+
+Route::post('/like','LikesController@add');
+
+Route::delete('/like','LikesController@destroy');
+
+                 //NOTIFICATIONS
+
+Route::get('/notifications','NotificationsController@index');
+Route::patch('/notifications','NotificationsController@clickToMark');
+Route::patch('/notifications/{id}','NotificationsController@update');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Post;
 
 class UsersController extends Controller
 {
@@ -16,7 +17,17 @@ class UsersController extends Controller
 
     public function show($id)
     {   $user = User::findOrFail($id);
-        return view('users.show',compact('user'));
+       // $posts = $user->post()->get();
+        if(admin()){
+            $posts = Post::with(['comment','user','like'])
+                ->with(['comment.user','comment.like'])->where('user_id',$id)->withTrashed()->get();
+        }
+        else{
+            $posts = Post::with(['comment','user','like'])
+                ->with(['comment.user','comment.like'])->where('user_id',$id)->get();
+        }
+
+        return view('users.show',compact('user','posts'));
     }
 
     /**

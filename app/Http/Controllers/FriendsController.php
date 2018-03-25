@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Friend;
 use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Notifications\FriendRequest;
+use App\Notifications\FriendAccepted;
 
 class FriendsController extends Controller
 {
@@ -15,17 +18,9 @@ class FriendsController extends Controller
      */
 
     public function index($id){
-        $list_user = Friend::where([
-        ['friend_id',$id],
-            ['accepted',3]
-        ])->orWhere([
-            ['user_id',$id],
-            ['accepted',3]
-        ])->simplePaginate(8);
-
-        return view('users.friends',compact('list_user','id'));
+        $user = User::findOrFail($id);
+        return view('users.friends',compact('user'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -40,11 +35,12 @@ class FriendsController extends Controller
                 'user_id' => Auth::id(),
                 'friend_id' => $friend_id,
             ]);
+
+            User::findOrFail($friend_id)->notify(new FriendRequest());
         }
         elseif(friendship($friend_id) == 2){
             $this->accept($friend_id);
         }
-
         return back();
     }
 
@@ -62,6 +58,8 @@ class FriendsController extends Controller
            ['user_id',$id],
            ['friend_id',Auth::id()]
            ])->update(['accepted' => 3]);
+
+       User::findOrFail($id)->notify(new FriendAccepted());
        return back();
     }
 

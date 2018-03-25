@@ -23,11 +23,8 @@ use Illuminate\Support\Facades\Auth;
             return $friend_query[0]->accepted;
         }
     }
-         function user($id){
-            $friend = User::where('id',$id)->get();
-            return $friend;
-    }
-       function to_accept($id){
+
+            function to_accept($id){
            $to_accept = Friend::where([
                ['friend_id','=', Auth::id()],
                 ['user_id','=',$id]
@@ -39,11 +36,11 @@ use Illuminate\Support\Facades\Auth;
                return 2;
            }
        }
-       function accept_list(){
-           $id = Auth::id();
-           $friend_request = Friend::where([
-               ['friend_id','=', $id],
-               ['accepted','=',2]])->get();
 
-           return $friend_request;
+
+       function admin(){
+           return (Auth::check() && Auth::user()->role->role_name === 'admin');
        }
+
+
+

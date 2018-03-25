@@ -8,12 +8,17 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>NOICE!</title>
 
     <!-- Styles -->
+    <link href="{{ asset('custom.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico')}}">
 </head>
+
 <body>
+<div class="shadow">
+    <div class="shadow-blur">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -28,27 +33,35 @@
                         <span class="icon-bar"></span>
                     </button>
 
-
+                    &nbsp;
                     <!-- Branding Image -->
+                    <a class="navbar-brand"  href="{{ url('/home') }}">
+                        WALL
+                    </a>
+
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        NOICE!
                     </a>
 
                 </div>
 
-                <form method="get" action="{{url('/search')}}" class="form-inline">
-                    <input class="form-control" name="q" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-default" type="submit">Search</button>
-                </form>
 
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+
+                <div class="collapse navbar-collapse flex-navbar" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+
+
+
+                    <form method="get" action="{{url('/search')}}" class="form-inline">
+                        <input class="form-control" name="q" type="search" placeholder="Search It Noice..." aria-label="Search">
+                        <button class="btn btn-outline-default" type="submit">Search</button>
+                    </form>
+
 
                     <!-- Right Side Of Navbar -->
+
+
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
@@ -57,7 +70,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                 {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -77,7 +90,11 @@
 
                                     </li>
                                     <li>
-                                        <a href="{{url('/friends/'.Auth::id())}}">
+                                        <a href="{{url('/users/'.Auth::user()->id)}}">My profile</a>
+
+                                    </li>
+                                    <li>
+                                        <a href="{{url('users/'.Auth::id().'/friends/')}}">
                                                 Friends
                                         </a>
 
@@ -87,26 +104,39 @@
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    @if(count(accept_list()) > 0)
-                                        <b style="color: red">{{count(accept_list())}} </b>
-                                        <b style="color: red">Notification</b>
+                                    @if(count(Auth::user()->unreadNotifications) > 0)
+                                        <form method="post" action="{{url('/notifications')}}" style="margin:0px; padding: 0px;">
+                                            {{csrf_field()}}
+                                            {{method_field('PATCH')}}
+                                            <button type="submit" class="btn btn-link" style="margin:0px; padding: 0px;">Your notifications
+                                                <b style="color: #0c9163;margin:0px; padding: 0px;">({{count(Auth::user()->unreadNotifications)}})</b>
+                                            </button>
+                                        </form>
                                     @else
-                                        Notifications
+                                        Your notifications
                                     @endif
-                                    <span class="caret"></span>
+                                    <span class="caret" style="padding: 0px;margin: 0px"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    @forelse(accept_list() as $to_accept)
-                                        <li style="font-size: smaller">User
-                                         <a href="{{url('/users/'.user($to_accept->user_id)[0]->id)}}">{{user($to_accept->user_id)[0]->name}}</a>
-                                         sent you a friend request</li>
-                                    @empty <h5 style="font-size: smaller">Nothing new...</h5>
+                                    @forelse(Auth::user()->unreadNotifications as $note)
+                                         @if(!empty($note->data['comment_id']))
+                                            <li><p class="text-justify"><a class="text-justify" href="{{url('posts/'.$note->data['post_id'].'#comment_'.$note->data['comment_id'])}}">{{$note->data['message']}}</a><br><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a></p></li>
+                                         @elseif(!empty($note->data['post_id']))<p>
+                                            <li><p class="text-justify"><a class="text-justify" href="{{url('posts/'.$note->data['post_id'])}}">{{$note->data['message'] }}</a><br><a href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['user_name']}}</a></p></li>
+                                        @elseif(empty($note->data['comment_id']) && !empty($note->data['post_id']))
+                                             <li><p class="text-justify"><a href="{{url('posts/'.$note->data['post_id'])}}">{{$note->data['message']}}<br>{{$note->data['user_name']}}</a></p></li>
+                                        @else
+                                             <li><p class="text-justify"><a  href="{{url('/users/'.$note->data['user_id'])}}">{{$note->data['message']}}<br>{{$note->data['user_name']}}</a></p></li>
+                                        @endif
+
+                                    @empty <li><a>Nothing new...</a></li>
                                     @endforelse
                                 </ul>
                             </li>
                         @endguest
                     </ul>
+
                 </div>
             </div>
         </nav>
@@ -116,5 +146,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    </div>
+</div>
 </body>
 </html>

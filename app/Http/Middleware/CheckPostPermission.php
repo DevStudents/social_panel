@@ -4,8 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\Post;
 
-class CheckUserPermission
+
+class CheckPostPermission
 {
     /**
      * Handle an incoming request.
@@ -16,9 +18,14 @@ class CheckUserPermission
      */
     public function handle($request, Closure $next)
     {
-        $id = $request->user;
-        if(Auth::check() && (intval($id) !== Auth::id()) && !admin()){
-            abort(403,'Permission denied :(');
+
+        $post_exists = Post::where([
+            ['id',$request->post],
+            ['user_id',Auth::id()]
+        ])->exists();
+
+        if((!Auth::check() || !$post_exists ) && !admin()) {
+            abort(403,'Permission denied - it is not your post :(');
         }
         return $next($request);
     }

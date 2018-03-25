@@ -17,6 +17,8 @@
 </head>
 
 <body>
+<div class="shadow">
+    <div class="shadow-blur">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -144,5 +146,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    </div>
+</div>
 </body>
 </html>

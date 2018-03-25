@@ -26,6 +26,8 @@
         }
     </style>
     <body>
+    <div class="shadow">
+        <div class="shadow-blur">
         <div class="flex-center position-ref full-height">
         <div class="skewedBox">
             <div class="content">
@@ -45,5 +47,7 @@
             </div>
         </div>
         </div>
+        </div>
+    </div>
     </body>
 </html>

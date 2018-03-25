@@ -1,20 +1,29 @@
-<div id="comment_{{$comment->id}}" class="wrapper" style="padding-right: 100px; margin: 10px; border-top: 1px solid #58b875; {{$comment->trashed() ? 'opacity:0.4;': ''}}">
+<div id="comment_{{$comment->id}}" class="wrapper-comment {{$comment->trashed() ? 'disabled': ''}}">
     @if($comment->user_id == Auth::id() || admin())
-        <div class="my_panel">
-            <a href="{{url('/comments/'. $comment->id .'/edit')}}" class="pull-right"><button type="submit" class="btn btn-success btn-sm pull-right"
-                                                                                              style="margin:10px;">
-                    Edit
-                </button></a>
-            <form method="post" action="{{url('/comments/'.$comment->id)}}">
-                {{csrf_field()}}
-                {{method_field('DELETE')}}
-                <button type="submit" onclick="return confirm('Are U sure?')" class="btn btn-danger btn-sm pull-right" style="margin:10px;">Delete</button>
-            </form>
+        <div class="btn-group pull-right">
+            <button class="btn btn-secondary btn-sm dropdown-toggle options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Options
+            </button>
+            <div class="dropdown-menu">
+                <form method="post" action="{{url('/comments/'.$comment->id)}}">
+                    {{csrf_field()}}
+                    {{method_field('DELETE')}}
+                    <button type="submit" onclick="return confirm('Are U sure?')" class="btn btn-link">Delete</button>
+                </form>
+                <a href="{{url('/comments/'. $comment->id .'/edit')}}">
+                    <button class="btn btn-link">
+                        Edit
+                    </button>
+                </a>
+            </div>
         </div>
+
     @endif
-   @include('comments.likes')
-    <img class="img-fluid pull-left" style="border-left: 1px solid #58b875; margin-right: 5px;"  src="{{url('/user-avatar/'.$comment->user_id.'/52')}}">
-    <a style="margin-left: 5px;" class="pull-left" href="{{url('/users/'.$comment->user_id)}}">{{$comment->user->name}} </a><br>
-    <p class="text-justify"   class="pull-left" >{{$comment->content}}</p>
+
+    @include('comments.likes')
+
+    <img class="img-fluid pull-left comment-avatar"  src="{{url('/user-avatar/'.$comment->user_id.'/60')}}">
+            <p class="text-justify name"><a class="pull-left" href="{{url('/users/'.$comment->user_id)}}">{{$comment->user->name}}</a></p><br>
+            <p class="text-justify">{{$comment->content}}</p>
 
 </div>

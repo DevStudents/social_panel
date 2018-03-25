@@ -1,14 +1,17 @@
 
-<div class="panel panel-default" {{$post->trashed() ? 'style=opacity:0.4;': ''}} id="post_{{$post->id}}">
+<div class="panel panel-default{{$post->trashed() ? ' disabled': ''}}" id="post_{{$post->id}}">
     <div class="panel-body">
-        <div class="wrapper" style="padding-right: 100px;padding-bottom: 30px;">
-            <div class="avatar" style="padding: 10px;">
-        <img src="{{url('/user-avatar/'.$post->user->id.'/80')}}" alt="avatar" class="img-responsive pull-left" style="padding-right: 20px">
-         <span><a href="{{url('/users/' .$post->user->id)}}">{{$post->user->name}}</a></span>
+         <p class="text-justify created-time"><small class="pull-right">Created at: <a href="{{url('/posts/' .$post->id)}}">{{$post->created_at}}</a></small></p>
+        <div class="wrapper">
+            <div class="avatar">
+        <img src="{{url('/user-avatar/'.$post->user->id.'/100')}}" alt="avatar" class="img-responsive pull-left" style="padding-right: 20px">
+        <div class="data">
+         <p class="text-justify name-post"><span><a href="{{url('/users/' .$post->user->id)}}">{{$post->user->name}}</a></span></p>
 
-         <small class="pull-right">Created at: <a href="{{url('/posts/' .$post->id)}}">{{$post->created_at}}</a></small>
+        </div>
             </div><br>
-        <div class="text-justify"  style="margin: 20px;">{{$post->post_content}}</div>
+
+        <p class="text-justify" >{{$post->post_content}}</p>
         </div>
 
         @if($post->user->id == Auth::id() || admin())

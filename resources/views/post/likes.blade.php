@@ -3,7 +3,7 @@
         {{csrf_field()}}
         {{method_field('delete')}}
         <input type="hidden" name="post_id" value="{{$post->id}}">
-        <button type="submit" class="btn btn-primary btn-sm pull-right" style="margin:10px;">{{$post->like->count()}} Not noice!</button>
+        <button type="submit" class="btn btn-primary btn-sm pull-right" style="margin:10px;">{{$post->like->count()}} noice!</button>
     </form>
 @elseif(Auth::check())
     <form method="post" action="{{url('/like')}}">

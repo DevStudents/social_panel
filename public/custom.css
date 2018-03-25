@@ -17,6 +17,7 @@
     height: 100%;
     width: 100%;
     background-color: rgba(174, 183, 174, 0.28);
+    text-align: center;
 }
 
 
@@ -113,6 +114,19 @@
 }
 .blur-container{
     min-height: 100vh;
+    text-align: center;
+}
+.blur-container h1{
+    color: whitesmoke;
+}
+.blur-container .row h5{
+    color: whitesmoke;
+}
+.blur-container a b{
+    color: whitesmoke;
+}
+.friend a{
+    color: whitesmoke;
 }
 .dropdown-menu{
     width: 100%;
@@ -209,24 +223,23 @@ min-width: 200px!important;
 .wrapper-comment{
     padding: 0px;
     margin: 10px 40px 20px 40px;
-    border-top: 1px solid #a2e61b;
+    border-top: 1.2px solid #a2e61b;
 }
 .wrapper-comment:first-child{
     border: none;
 }
 .wrapper{
-    margin: 20px;
-    padding: 5px;
+    padding: 10px;
 }
 .avatar{
     margin: 10px;
     padding: 5px;
 }
 .data{
-    display: flex;
+
 }
 .data p{
-    flex-grow: 1;
+
     margin: 10px;
 }
 .comment-wrapper{
@@ -258,9 +271,7 @@ min-width: 200px!important;
     font-size: 2rem;
     margin-bottom: 40px;
 }
-a{
-    color: #689110 !important;
-}
+
 .name-post{
     font-size: 3rem;
     margin: 0px!important;
@@ -296,4 +307,32 @@ a{
 .row .pagination  li a:hover{
     background-color: #a2e61b;
     border-color: #a2e61b;
+}
+.notifications{
+    background-color: rgba(0, 0, 0, 0.34);
+    padding: 50px;
+    border-radius: 20px;
+    height: 100%;
+}
+.notifications h1{
+    color: whitesmoke;
+}
+.notifications .note a{
+    color: #bcff43 !important;
+}
+.btn-success{
+    border-radius: 10px!important;
+}
+.avatar{
+    padding: 0px;
+}
+.text-post{
+    padding: 40px;
+    margin:40px 40px 10px 10px;
+    text-align: justify;
+}
+.post-avatar{
+    padding: 0px!important;
+    margin: 10px 10px 0px 0px;
+    border: 1px solid #a2e61b;
 }

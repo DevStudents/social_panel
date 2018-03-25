@@ -7,7 +7,7 @@
                     <h1>Number of friends: {{(count($user->friends()))}}</h1>
                 @endif
                 @forelse($user->friends() as $user)
-                    <div class="col-md-3 col-sm-4 col-xs-6" style="align-items: center;">
+                    <div class="col-md-3 col-sm-4 col-xs-6 friend">
                         <img class="img-responsive" src="{{url('/user-avatar/'.$user->id
                         .'/250')}}" alt="User avatar">
                         <a href="{{url('/users/'.$user->id)}}">

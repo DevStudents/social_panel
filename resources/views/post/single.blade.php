@@ -4,15 +4,8 @@
          <p class="text-justify created-time"><small class="pull-right">Created at: <a href="{{url('/posts/' .$post->id)}}">{{$post->created_at}}</a></small></p>
         <div class="wrapper">
             <div class="avatar">
-        <img src="{{url('/user-avatar/'.$post->user->id.'/100')}}" alt="avatar" class="img-responsive pull-left" style="padding-right: 20px">
+        <img src="{{url('/user-avatar/'.$post->user->id.'/100')}}" alt="avatar" class="img-responsive pull-left post-avatar" style="padding-right: 20px">
         <div class="data">
-         <p class="text-justify name-post"><span><a href="{{url('/users/' .$post->user->id)}}">{{$post->user->name}}</a></span></p>
-
-        </div>
-            </div><br>
-
-        <p class="text-justify" >{{$post->post_content}}</p>
-        </div>
 
         @if($post->user->id == Auth::id() || admin())
             <div class="btn-group pull-right">
@@ -34,7 +27,15 @@
         @endif
 
         @include('post.likes')
+         <p class="name-post pull-left"><span><a href="{{url('/users/' .$post->user->id)}}">{{$post->user->name}}</a></span></p>
 
+        </div>
+            </div>
+
+        <div class="text-post">
+        <p>{{$post->post_content}}</p>
+        </div>
+        </div>
 
 
     </div>
